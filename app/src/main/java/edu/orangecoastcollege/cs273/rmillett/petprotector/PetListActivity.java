@@ -13,6 +13,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
@@ -23,6 +24,10 @@ import java.util.List;
  */
 public class PetListActivity extends AppCompatActivity {
     private ImageView petImageView;
+    private EditText petNameEditText;
+    private EditText petDetailsEditText;
+    private EditText phoneNumberEditText;
+
     private Uri imageUri;
 
     // Constants for permissions
@@ -39,6 +44,9 @@ public class PetListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pet_list);
 
         // Connect to view
+        petNameEditText = (EditText) findViewById(R.id.petDetailsEditText);
+        petDetailsEditText = (EditText) findViewById(R.id.petDetailsEditText);
+        phoneNumberEditText = (EditText) findViewById(R.id.phoneNumberEditText);
         petImageView = (ImageView) findViewById(R.id.petImageView);
         // Set image from URI
         petImageView.setImageURI(getUriFromResource(this, R.drawable.none));
@@ -100,6 +108,10 @@ public class PetListActivity extends AppCompatActivity {
             imageUri = data.getData();
             petImageView.setImageURI(imageUri);
         }
+    }
+
+    public void addPet(View view) {
+
     }
 
     /**
