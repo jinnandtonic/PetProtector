@@ -3,7 +3,7 @@ package edu.orangecoastcollege.cs273.rmillett.petprotector;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseErrorHandler;
+// import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
@@ -29,8 +29,8 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String FIELD_PHONE = "phone";
     private static final String FIELD_IMAGE_URI = "image_URI";
 
-    public DBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
+    public DBHelper(Context context){
+        super (context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     /**
