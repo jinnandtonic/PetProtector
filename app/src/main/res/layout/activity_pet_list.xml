@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="@string/name"/>
+        android:hint="@string/name"/>
 
     <EditText
         android:id="@+id/petDetailsEditText"
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="@string/details"/>
+        android:hint="@string/details"/>
 
     <EditText
         android:id="@+id/phoneNumberEditText"
@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="number"
-        android:text="@string/phone_number"/>
+        android:hint="@string/phone_number"/>
 
     <ImageView
         android:id="@+id/petImageView"
@@ -60,6 +60,7 @@
         android:text="@string/add_button_text"/>
 
     <ListView
+        android:id="@+id/petsListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </LinearLayout>

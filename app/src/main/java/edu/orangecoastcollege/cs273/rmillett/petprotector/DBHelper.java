@@ -47,7 +47,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + FIELD_NAME + " TEXT,"
                 + FIELD_DETAILS + " TEXT,"
                 + FIELD_PHONE + " TEXT,"
-                + FIELD_IMAGE_URI + " TEXT,"
+                + FIELD_IMAGE_URI + " TEXT"
                 + ")";
         database.execSQL(table);
     }
@@ -71,7 +71,7 @@ public class DBHelper extends SQLiteOpenHelper {
      * Adds a <code>Pet</code> object to the database
      * @param pet a <code>Pet</code> objected to be added to the database
      */
-    public void addPet(Pet pet) {
+    public int addPet(Pet pet) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
@@ -81,7 +81,10 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(FIELD_PHONE, pet.getPhone());
         values.put(FIELD_IMAGE_URI, pet.getImageURI().toString());
 
+        int id = (int) db.insert(DATABASE_TABLE, null, values);
         db.close();
+
+        return id;
     }
 
     /**
@@ -90,7 +93,7 @@ public class DBHelper extends SQLiteOpenHelper {
      */
     public ArrayList<Pet> getAllPets() {
         ArrayList<Pet> petList = new ArrayList<>();
-        SQLiteDatabase database = this.getReadableDatabase();
+        SQLiteDatabase database = getReadableDatabase();
 
         // get all the colleges from the database.
         Cursor cursor = database.query(DATABASE_TABLE,
@@ -123,5 +126,15 @@ public class DBHelper extends SQLiteOpenHelper {
         database.close();
 
         return petList;
+    }
+
+    /**
+     * Deletes all <code>Pet</code> objects from the database
+     */
+    public void deleteAllPets()
+    {
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(DATABASE_TABLE, null, null);
+        db.close();
     }
 }

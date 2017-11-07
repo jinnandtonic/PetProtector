@@ -13,9 +13,11 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -55,12 +57,21 @@ public class PetListActivity extends AppCompatActivity {
         db = new DBHelper(this);
 
         // Connect to view
-        mPetNameEditText = (EditText) findViewById(R.id.petDetailsEditText);
+        mPetNameEditText = (EditText) findViewById(R.id.petNameEditText);
         mPetDetailsEditText = (EditText) findViewById(R.id.petDetailsEditText);
         mPhoneNumberEditText = (EditText) findViewById(R.id.phoneNumberEditText);
         mPetImageView = (ImageView) findViewById(R.id.petImageView);
         // Set image from URI
         mPetImageView.setImageURI(getUriFromResource(this, R.drawable.none));
+        petsListView = (ListView) findViewById(R.id.petsListView);
+
+        mPetsList = db.getAllPets();
+        petListAdapter = new PetListAdapter(this, R.layout.pet_list_item, mPetsList);
+        Log.e("PET PRO", "mPetsList size->" + mPetsList.size());
+        petsListView.setAdapter(petListAdapter);
+
+        imageUri = getUriFromResource(this, R.drawable.none);
+        mPetImageView.setImageURI(imageUri);
     }
 
     /**
@@ -149,7 +160,22 @@ public class PetListActivity extends AppCompatActivity {
             mPetNameEditText.setText(R.string.name);
             mPetDetailsEditText.setText(R.string.details);
             mPhoneNumberEditText.setText(R.string.phone_number);
+            imageURI = getUriFromResource(this, R.drawable.none);
+            mPetImageView.setImageURI(imageURI);
         }
+    }
+
+    public void viewPetDetails(View view) {
+        LinearLayout selectedItem = (LinearLayout) view;
+        Pet selectedPet = (Pet) selectedItem.getTag();
+
+        Intent detailsIntent = new Intent(this, PetDetailsActivity.class);
+        detailsIntent.putExtra("Name", selectedPet.getName());
+        detailsIntent.putExtra("Details", selectedPet.getDetails());
+        detailsIntent.putExtra("Phone", selectedPet.getPhone());
+        detailsIntent.putExtra("ImageURI", selectedPet.getImageURI().toString());
+
+        startActivity(detailsIntent);
     }
 
     /**

@@ -28,7 +28,7 @@
             android:id="@+id/petListNameTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/text_view_list_item_buffer"
+            android:layout_marginBottom="@dimen/image_list_item_margins"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="@color/colorSecondaryDark"
             tools:text="@string/name"/>
